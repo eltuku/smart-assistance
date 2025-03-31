@@ -261,4 +261,66 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                     <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
                         <i class="fas fa-check-circle"></i> Presente
+                    </button>
+                    <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
+                        <i class="fas fa-clock"></i> Tarde
+                    </button>
+                    <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
+                        <i class="fas fa-times-circle"></i> Ausente
+                    </button>
+                </td>
+            `;
+            table.appendChild(row);
+            students.push({name, grade});
+        }
 
+        document.getElementById('add-student-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value;
+            const grade = document.getElementById('student-grade').value;
+            
+            addStudentToTable(name, grade);
+            document.getElementById('add-student-form').reset();
+        });
+
+        // Login System
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if(username === 'admin' && password === 'admin123') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app-content').classList.remove('hidden');
+                // For GitHub Pages, we'll use sessionStorage instead of URL modification
+                sessionStorage.setItem('loggedIn', 'true');
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        }
+
+        // Check if already logged in
+        if(sessionStorage.getItem('loggedIn') === 'true') {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-content').classList.remove('hidden');
+        }
+
+        // Form handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+
+        document.getElementById('login-form').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleLogin();
+            }
+        });
+
+        // Prevent form submission on page load
+        if(window.location.search) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+</body>
+</html>
