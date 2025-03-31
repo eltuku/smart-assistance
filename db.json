@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "role": "teacher"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Juan Pérez",
+      "grade": "1° Grado",
+      "attendance": []
+    },
+    {
+      "id": 2,
+      "name": "María González",
+      "grade": "2° Grado",
+      "attendance": []
+    },
+    {
+      "id": 3,
+      "name": "Carlos Rodríguez",
+      "grade": "3° Grado",
+      "attendance": []
+    }
+  ]
+}
