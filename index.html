@@ -32,13 +32,11 @@
             <form id="login-form" class="space-y-4">
                 <div>
                     <label for="username" class="block text-sm font-medium text-blue-700 mb-1">Usuario</label>
-                    <input type="text" id="username" required 
-                           class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" id="username" required class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium text-blue-700 mb-1">Contraseña</label>
-                    <input type="password" id="password" required 
-                           class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="password" id="password" required class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
                     Ingresar
@@ -49,131 +47,130 @@
 
     <!-- Main App (hidden by default) -->
     <div id="app-content" class="hidden">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <header class="flex flex-col items-center mb-8">
-            <div class="logo w-32 h-32 mb-4"></div>
-            <h1 class="text-3xl font-bold text-blue-800">SMART ASSISTANCE</h1>
-            <p class="text-blue-600">Sistema de Gestión de Asistencia Educativa</p>
-        </header>
+        <div class="container mx-auto px-4 py-8">
+            <!-- Header -->
+            <header class="flex flex-col items-center mb-8">
+                <div class="logo w-32 h-32 mb-4"></div>
+                <h1 class="text-3xl font-bold text-blue-800">SMART ASSISTANCE</h1>
+                <p class="text-blue-600">Sistema de Gestión de Asistencia Educativa</p>
+            </header>
 
-        <!-- Main Content -->
-        <main class="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold text-blue-700">Registro de Asistencia</h2>
-                <div class="text-sm text-blue-600">Fecha: <span id="current-date"></span></div>
-            </div>
-
-            <!-- Search and Filter -->
-            <div class="mb-6 flex flex-col md:flex-row gap-4">
-                <div class="flex-1">
-                    <label for="search" class="block text-sm font-medium text-blue-700 mb-1">Buscar Alumno</label>
-                    <input type="text" id="search" placeholder="Nombre o ID del alumno" 
-                           class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <!-- Main Content -->
+            <main class="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-blue-700">Registro de Asistencia</h2>
+                    <div class="text-sm text-blue-600">Fecha: <span id="current-date"></span></div>
                 </div>
-                <div>
-                    <label for="grade" class="block text-sm font-medium text-blue-700 mb-1">Grado</label>
-                    <select id="grade" class="px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">Todos</option>
-                        <option value="1">1° Grado</option>
-                        <option value="2">2° Grado</option>
-                        <option value="3">3° Grado</option>
-                    </select>
-                </div>
-            </div>
 
-            <!-- Add Student Form -->
-            <div class="bg-blue-50 p-4 rounded-lg mb-6">
-                <h3 class="text-lg font-medium text-blue-800 mb-3">Agregar Nuevo Alumno</h3>
-                <form id="add-student-form" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label for="student-name" class="block text-sm font-medium text-blue-700 mb-1">Nombre Completo</label>
-                        <input type="text" id="student-name" required class="w-full px-4 py-2 border border-blue-200 rounded-lg">
+                <!-- Search and Filter -->
+                <div class="mb-6 flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <label for="search" class="block text-sm font-medium text-blue-700 mb-1">Buscar Alumno</label>
+                        <input type="text" id="search" placeholder="Nombre o ID del alumno" class="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
-                        <label for="student-grade" class="block text-sm font-medium text-blue-700 mb-1">Grado</label>
-                        <select id="student-grade" required class="w-full px-4 py-2 border border-blue-200 rounded-lg">
-                            <option value="1° Grado">1° Grado</option>
-                            <option value="2° Grado">2° Grado</option>
-                            <option value="3° Grado">3° Grado</option>
+                        <label for="grade" class="block text-sm font-medium text-blue-700 mb-1">Grado</label>
+                        <select id="grade" class="px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Todos</option>
+                            <option value="1">1° Grado</option>
+                            <option value="2">2° Grado</option>
+                            <option value="3">3° Grado</option>
                         </select>
                     </div>
-                    <div class="flex items-end">
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            <i class="fas fa-plus mr-2"></i>Agregar
-                        </button>
+                </div>
+
+                <!-- Add Student Form -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <h3 class="text-lg font-medium text-blue-800 mb-3">Agregar Nuevo Alumno</h3>
+                    <form id="add-student-form" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="student-name" class="block text-sm font-medium text-blue-700 mb-1">Nombre Completo</label>
+                            <input type="text" id="student-name" required class="w-full px-4 py-2 border border-blue-200 rounded-lg">
+                        </div>
+                        <div>
+                            <label for="student-grade" class="block text-sm font-medium text-blue-700 mb-1">Grado</label>
+                            <select id="student-grade" required class="w-full px-4 py-2 border border-blue-200 rounded-lg">
+                                <option value="1° Grado">1° Grado</option>
+                                <option value="2° Grado">2° Grado</option>
+                                <option value="3° Grado">3° Grado</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                <i class="fas fa-plus mr-2"></i>Agregar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Attendance Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-blue-200">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Alumno</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Grado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-list" class="bg-white divide-y divide-blue-200">
+                            <!-- Students will be added dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Estadísticas Generales</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow border border-blue-100">
+                            <h4 class="text-blue-700 font-medium mb-2">Asistencia Total</h4>
+                            <div class="h-4 bg-gray-200 rounded-full">
+                                <div id="attendance-bar" class="h-full bg-green-500 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="attendance-percent" class="text-2xl font-bold text-blue-800 mt-2">0%</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow border border-blue-100">
+                            <h4 class="text-yellow-700 font-medium mb-2">Inasistencias</h4>
+                            <div class="h-4 bg-gray-200 rounded-full">
+                                <div id="absence-bar" class="h-full bg-red-500 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="absence-percent" class="text-2xl font-bold text-red-800 mt-2">0%</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow border border-blue-100">
+                            <h4 class="text-purple-700 font-medium mb-2">Llegadas Tarde</h4>
+                            <div class="h-4 bg-gray-200 rounded-full">
+                                <div id="late-bar" class="h-full bg-yellow-500 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="late-percent" class="text-2xl font-bold text-yellow-800 mt-2">0%</p>
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <!-- Attendance Table -->
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-blue-200">
-                    <thead class="bg-blue-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Alumno</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Grado</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Estado</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="students-list" class="bg-white divide-y divide-blue-200">
-                        <!-- Students will be added dynamically -->
-                    </tbody>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
-                                    <i class="fas fa-check-circle"></i> Presente
-                                </button>
-                                <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
-                                    <i class="fas fa-clock"></i> Tarde
-                                </button>
-                                <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
-                                    <i class="fas fa-times-circle"></i> Ausente
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">Carlos Rodríguez</td>
-                            <td class="px-6 py-4 whitespace-nowrap">3° Grado</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Ausente</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
-                                    <i class="fas fa-check-circle"></i> Presente
-                                </button>
-                                <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
-                                    <i class="fas fa-clock"></i> Tarde
-                                </button>
-                                <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
-                                    <i class="fas fa-times-circle"></i> Ausente
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Summary -->
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="text-blue-700 font-medium mb-2">Presentes</h3>
-                    <p class="text-2xl font-bold text-blue-800">1</p>
+                <!-- Modal Perfil Alumno -->
+                <div id="student-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 id="modal-title" class="text-xl font-bold text-blue-800"></h3>
+                            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="modal-content" class="space-y-4">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-yellow-50 p-4 rounded-lg">
-                    <h3 class="text-yellow-700 font-medium mb-2">Tardes</h3>
-                    <p class="text-2xl font-bold text-yellow-800">1</p>
-                </div>
-                <div class="bg-red-50 p-4 rounded-lg">
-                    <h3 class="text-red-700 font-medium mb-2">Ausentes</h3>
-                    <p class="text-2xl font-bold text-red-800">1</p>
-                </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
     <script>
+        // Variables globales
+        let students = [];
+        let studentRecords = {};
+
         // Set current date
         const today = new Date();
         document.getElementById('current-date').textContent = today.toLocaleDateString('es-ES', {
@@ -183,37 +180,146 @@
             day: 'numeric'
         });
 
-        // Attendance marking function
+        // Student Management
+        function addStudentToTable(name, grade) {
+            const table = document.getElementById('students-list');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap cursor-pointer hover:text-blue-600" onclick="openStudentProfile('${name}')">${name}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${grade}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">No registrado</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
+                        <i class="fas fa-check-circle"></i> Presente
+                    </button>
+                    <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
+                        <i class="fas fa-clock"></i> Tarde
+                    </button>
+                    <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
+                        <i class="fas fa-times-circle"></i> Ausente
+                    </button>
+                </td>
+            `;
+            table.appendChild(row);
+            students.push({name, grade});
+            studentRecords[name] = { present: 0, late: 0, absent: 0 };
+        }
+
+        document.getElementById('add-student-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value;
+            const grade = document.getElementById('student-grade').value;
+            
+            addStudentToTable(name, grade);
+            document.getElementById('add-student-form').reset();
+        });
+
+        // Attendance System
         function markAttendance(button, status) {
             const row = button.closest('tr');
+            const studentName = row.querySelector('td:first-child').textContent;
             const statusCell = row.querySelector('td:nth-child(3)');
             const statusBadge = statusCell.querySelector('span');
             
-            // Remove all classes from badge
+            // Update status badge
             statusBadge.className = 'px-2 py-1 text-xs font-semibold rounded-full';
             
-            // Update based on status
             if (status === 'present') {
                 statusBadge.classList.add('bg-green-100', 'text-green-800');
                 statusBadge.textContent = 'Presente';
+                studentRecords[studentName].present++;
             } else if (status === 'late') {
                 statusBadge.classList.add('bg-yellow-100', 'text-yellow-800');
                 statusBadge.textContent = 'Tarde';
+                studentRecords[studentName].late++;
             } else if (status === 'absent') {
                 statusBadge.classList.add('bg-red-100', 'text-red-800');
                 statusBadge.textContent = 'Ausente';
+                studentRecords[studentName].absent++;
             }
             
-            // Update summary (in a real app, this would be calculated from all students)
-            updateSummary();
+            updateStatistics();
         }
 
-        function updateSummary() {
-            // In a real app, this would count all students' statuses
-            // For demo, we're just using the sample data
-            document.querySelector('.bg-blue-50 p').textContent = '1';
-            document.querySelector('.bg-yellow-50 p').textContent = '1';
-            document.querySelector('.bg-red-50 p').textContent = '1';
+        function updateStatistics() {
+            let total = 0, present = 0, late = 0, absent = 0;
+            
+            // Calculate totals
+            for (const student in studentRecords) {
+                present += studentRecords[student].present;
+                late += studentRecords[student].late;
+                absent += studentRecords[student].absent;
+                total += studentRecords[student].present + 
+                        studentRecords[student].late + 
+                        studentRecords[student].absent;
+            }
+            
+            // Update percentages
+            if (total > 0) {
+                const presentPercent = Math.round((present / total) * 100);
+                const latePercent = Math.round((late / total) * 100);
+                const absentPercent = Math.round((absent / total) * 100);
+                
+                document.getElementById('attendance-percent').textContent = `${presentPercent}%`;
+                document.getElementById('attendance-bar').style.width = `${presentPercent}%`;
+                
+                document.getElementById('late-percent').textContent = `${latePercent}%`;
+                document.getElementById('late-bar').style.width = `${latePercent}%`;
+                
+                document.getElementById('absence-percent').textContent = `${absentPercent}%`;
+                document.getElementById('absence-bar').style.width = `${absentPercent}%`;
+            }
+        }
+
+        // Student Profile Modal
+        function openStudentProfile(name) {
+            const record = studentRecords[name] || { present: 0, late: 0, absent: 0 };
+            const total = record.present + record.late + record.absent;
+            
+            document.getElementById('modal-title').textContent = `Perfil de ${name}`;
+            
+            let content = `
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="bg-green-50 p-3 rounded-lg">
+                        <p class="text-sm text-green-700">Presente</p>
+                        <p class="text-xl font-bold">${record.present}</p>
+                    </div>
+                    <div class="bg-yellow-50 p-3 rounded-lg">
+                        <p class="text-sm text-yellow-700">Tarde</p>
+                        <p class="text-xl font-bold">${record.late}</p>
+                    </div>
+                    <div class="bg-red-50 p-3 rounded-lg">
+                        <p class="text-sm text-red-700">Ausente</p>
+                        <p class="text-xl font-bold">${record.absent}</p>
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <h4 class="font-medium text-blue-700 mb-2">Estadísticas</h4>
+                    <div class="space-y-2">
+                        <div>
+                            <p class="text-sm">Asistencia total: <span class="font-bold">${total > 0 ? Math.round((record.present / total) * 100) : 0}%</span></p>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-full bg-green-500 rounded-full" style="width: ${total > 0 ? (record.present / total) * 100 : 0}%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm">Llegadas tarde: <span class="font-bold">${total > 0 ? Math.round((record.late / total) * 100) : 0}%</span></p>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-full bg-yellow-500 rounded-full" style="width: ${total > 0 ? (record.late / total) * 100 : 0}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('student-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('student-modal').classList.add('hidden');
         }
 
         // Search functionality
@@ -246,43 +352,6 @@
             });
         });
 
-        // Student Management
-        let students = [];
-        
-        function addStudentToTable(name, grade) {
-            const table = document.getElementById('students-list');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap">${name}</td>
-                <td class="px-6 py-4 whitespace-nowrap">${grade}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">No registrado</span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
-                        <i class="fas fa-check-circle"></i> Presente
-                    </button>
-                    <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
-                        <i class="fas fa-clock"></i> Tarde
-                    </button>
-                    <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
-                        <i class="fas fa-times-circle"></i> Ausente
-                    </button>
-                </td>
-            `;
-            table.appendChild(row);
-            students.push({name, grade});
-        }
-
-        document.getElementById('add-student-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('student-name').value;
-            const grade = document.getElementById('student-grade').value;
-            
-            addStudentToTable(name, grade);
-            document.getElementById('add-student-form').reset();
-        });
-
         // Login System
         function handleLogin() {
             const username = document.getElementById('username').value;
@@ -291,7 +360,6 @@
             if(username === 'admin' && password === 'admin123') {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('app-content').classList.remove('hidden');
-                // For GitHub Pages, we'll use sessionStorage instead of URL modification
                 sessionStorage.setItem('loggedIn', 'true');
             } else {
                 alert('Usuario o contraseña incorrectos');
