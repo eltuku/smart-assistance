@@ -167,9 +167,28 @@
     </div>
 
     <script>
+        // Sistema de autenticación mejorado
+        const USERS = {
+            'admin': {
+                password: 'admin123',
+                role: 'admin',
+                name: 'Administrador'
+            },
+            'profesor': {
+                password: 'profesor123',
+                role: 'teacher',
+                name: 'Profesor'
+            },
+            'padre': {
+                password: 'padre123',
+                role: 'parent',
+                name: 'Padre de Familia'
+            }
+        };
+
         // Variables globales
-        let students = [];
-        let studentRecords = {};
+        let students = JSON.parse(localStorage.getItem('students')) || [];
+        let studentRecords = JSON.parse(localStorage.getItem('attendance')) || {};
 
         // Set current date
         const today = new Date();
@@ -180,31 +199,82 @@
             day: 'numeric'
         });
 
+        // Inicializar tabla de estudiantes
+        function initStudentsTable() {
+            const table = document.getElementById('students-list');
+            table.innerHTML = '';
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap cursor-pointer hover:text-blue-600" onclick="openStudentProfile('${student.name}')">${student.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${student.grade}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full ${getStatusClass(student.name)}">${getStatusText(student.name)}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present', '${student.name}')">
+                            <i class="fas fa-check-circle"></i> Presente
+                        </button>
+                        <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late', '${student.name}')">
+                            <i class="fas fa-clock"></i> Tarde
+                        </button>
+                        <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent', '${student.name}')">
+                            <i class="fas fa-times-circle"></i> Ausente
+                        </button>
+                    </td>
+                `;
+                table.appendChild(row);
+                
+                if (!studentRecords[student.name]) {
+                    studentRecords[student.name] = { present: 0, late: 0, absent: 0 };
+                }
+            });
+            saveData();
+        }
+
+        // Obtener clase CSS para el estado
+        function getStatusClass(studentName) {
+            const record = studentRecords[studentName] || { present: 0, late: 0, absent: 0 };
+            if (record.present > 0) return 'bg-green-100 text-green-800';
+            if (record.late > 0) return 'bg-yellow-100 text-yellow-800';
+            if (record.absent > 0) return 'bg-red-100 text-red-800';
+            return 'bg-gray-100 text-gray-800';
+        }
+
+        // Obtener texto para el estado
+        function getStatusText(studentName) {
+            const record = studentRecords[studentName] || { present: 0, late: 0, absent: 0 };
+            if (record.present > 0) return 'Presente';
+            if (record.late > 0) return 'Tarde';
+            if (record.absent > 0) return 'Ausente';
+            return 'No registrado';
+        }
+
+        // Guardar datos en localStorage
+        function saveData() {
+            localStorage.setItem('students', JSON.stringify(students));
+            localStorage.setItem('attendance', JSON.stringify(studentRecords));
+            
+            // Crear backup cada 24 horas
+            const lastBackup = localStorage.getItem('lastBackup');
+            const now = new Date().getTime();
+            
+            if (!lastBackup || (now - parseInt(lastBackup)) > 86400000) {
+                localStorage.setItem('backup_' + now, JSON.stringify({
+                    students: students,
+                    attendance: studentRecords,
+                    date: new Date().toISOString()
+                }));
+                localStorage.setItem('lastBackup', now.toString());
+            }
+        }
+
         // Student Management
         function addStudentToTable(name, grade) {
-            const table = document.getElementById('students-list');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="px-6 py-4 whitespace-nowrap cursor-pointer hover:text-blue-600" onclick="openStudentProfile('${name}')">${name}</td>
-                <td class="px-6 py-4 whitespace-nowrap">${grade}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">No registrado</span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <button class="mr-2 text-blue-600 hover:text-blue-800" onclick="markAttendance(this, 'present')">
-                        <i class="fas fa-check-circle"></i> Presente
-                    </button>
-                    <button class="mr-2 text-yellow-600 hover:text-yellow-800" onclick="markAttendance(this, 'late')">
-                        <i class="fas fa-clock"></i> Tarde
-                    </button>
-                    <button class="text-red-600 hover:text-red-800" onclick="markAttendance(this, 'absent')">
-                        <i class="fas fa-times-circle"></i> Ausente
-                    </button>
-                </td>
-            `;
-            table.appendChild(row);
             students.push({name, grade});
             studentRecords[name] = { present: 0, late: 0, absent: 0 };
+            saveData();
+            initStudentsTable();
         }
 
         document.getElementById('add-student-form').addEventListener('submit', function(e) {
@@ -217,30 +287,14 @@
         });
 
         // Attendance System
-        function markAttendance(button, status) {
-            const row = button.closest('tr');
-            const studentName = row.querySelector('td:first-child').textContent;
-            const statusCell = row.querySelector('td:nth-child(3)');
-            const statusBadge = statusCell.querySelector('span');
-            
-            // Update status badge
-            statusBadge.className = 'px-2 py-1 text-xs font-semibold rounded-full';
-            
-            if (status === 'present') {
-                statusBadge.classList.add('bg-green-100', 'text-green-800');
-                statusBadge.textContent = 'Presente';
-                studentRecords[studentName].present++;
-            } else if (status === 'late') {
-                statusBadge.classList.add('bg-yellow-100', 'text-yellow-800');
-                statusBadge.textContent = 'Tarde';
-                studentRecords[studentName].late++;
-            } else if (status === 'absent') {
-                statusBadge.classList.add('bg-red-100', 'text-red-800');
-                statusBadge.textContent = 'Ausente';
-                studentRecords[studentName].absent++;
-            }
-            
+        function markAttendance(button, status, studentName) {
+            studentRecords[studentName][status]++;
+            saveData();
+            initStudentsTable();
             updateStatistics();
+            
+            // Mostrar notificación
+            showNotification(`Asistencia registrada: ${studentName} - ${getStatusText(studentName)}`);
         }
 
         function updateStatistics() {
@@ -312,6 +366,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="pt-4">
+                    <button onclick="generateReport('${name}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-file-pdf mr-2"></i>Generar Reporte PDF
+                    </button>
+                </div>
             `;
             
             document.getElementById('modal-content').innerHTML = content;
@@ -320,6 +379,40 @@
 
         function closeModal() {
             document.getElementById('student-modal').classList.add('hidden');
+        }
+
+        // Generar reporte PDF (simulado)
+        function generateReport(studentName) {
+            const record = studentRecords[studentName] || { present: 0, late: 0, absent: 0 };
+            const total = record.present + record.late + record.absent;
+            
+            const report = `
+                REPORTE DE ASISTENCIA
+                ---------------------
+                Alumno: ${studentName}
+                Fecha: ${new Date().toLocaleDateString()}
+                
+                Asistencias: ${record.present}
+                Tardanzas: ${record.late}
+                Ausencias: ${record.absent}
+                
+                Porcentaje de asistencia: ${total > 0 ? Math.round((record.present / total) * 100) : 0}%
+            `;
+            
+            alert('Reporte generado (simulación):\n\n' + report);
+            showNotification(`Reporte generado para ${studentName}`);
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
         }
 
         // Search functionality
@@ -353,37 +446,32 @@
         });
 
         // Login System
-        function handleLogin() {
+        function handleLogin(e) {
+            e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            if(username === 'admin' && password === 'admin123') {
+            if(USERS[username] && USERS[username].password === password) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('app-content').classList.remove('hidden');
-                sessionStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify(USERS[username]));
+                initStudentsTable();
+                updateStatistics();
             } else {
                 alert('Usuario o contraseña incorrectos');
             }
         }
 
         // Check if already logged in
-        if(sessionStorage.getItem('loggedIn') === 'true') {
+        if(localStorage.getItem('currentUser')) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('app-content').classList.remove('hidden');
+            initStudentsTable();
+            updateStatistics();
         }
 
         // Form handling
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleLogin();
-        });
-
-        document.getElementById('login-form').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleLogin();
-            }
-        });
+        document.getElementById('login-form').addEventListener('submit', handleLogin);
 
         // Prevent form submission on page load
         if(window.location.search) {
