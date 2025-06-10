@@ -1,0 +1,15 @@
+Coincidencias encontradas: 9
+Match 1: Número=2, Apellidos='ALONSO', Nombres='Nicolás Andrés'
+Match 2: Número=3, Apellidos='AYALA', Nombres='Agustín Franco'
+Match 3: Número=4, Apellidos='BERJEL', Nombres='Joaquín Nahuel'
+Match 4: Número=5, Apellidos='CAFFERATA PAILLALEF', Nombres='Lara Sol'
+Match 5: Número=6, Apellidos='CARSETTI GRZELAK', Nombres='Bruno'
+Match 6: Número=7, Apellidos='D'AMORE', Nombres='Morena'
+Match 7: Número=8, Apellidos='DE SIMONE PENTIMALLI', Nombres='Uma'
+Match 8: Número=9, Apellidos='DEVANI', Nombres='Sofía Belén'
+Match 9: Número=10, Apellidos='DI PRINZIO', Nombres='Benjamín'
+
+Patrón simple - Coincidencias: 10
+Simple Match 1: Número=1, Apellidos='ALBARRACÌN AMIONE', Nombres='Byron Mateo'
+Simple Match 2: Número=2, Apellidos='ALONSO', Nombres='Nicolás Andrés'
+Simple Match 3: Número=3, Apellidos='AYALA', Nombres='Agustín Franco'
